@@ -6,7 +6,7 @@ describe('package', function() {
   var compilers = new Compilers;
 
   function newp(dir, name) {
-    return new Package(__dirname + '/' + dir, name, compilers);
+    return new Package(name, __dirname + '/' + dir, compilers);
   }
 
   it('discovers', function(done) {
