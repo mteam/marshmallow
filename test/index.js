@@ -2,14 +2,29 @@ var mm = require('../lib/index'),
     expect = require('expect.js');
 
 describe('marshmallow', function() {
+  function d(dir) {
+    return __dirname + '/' + dir;
+  }
+
   it('works', function(done) {
-    var dirs = {
-      bar: __dirname + '/bar',
-      foo: __dirname + '/foo',
-      baz: [__dirname + '/baz', 'lib/**/*']
+    var pkgs = {
+
+      bar: {
+        dir: d('bar')
+      },
+
+      foo: {
+        dir: d('foo')
+      },
+
+      baz: {
+        dir: d('baz'),
+        include: 'lib/**/*'
+      }
+
     };
 
-    mm(dirs).compile(function(err, output) {
+    mm(pkgs).compile(function(err, output) {
       var e = expect(output);
 
       e.to.contain('baz module');
