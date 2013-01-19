@@ -2,14 +2,18 @@
   "name": "marshmallow",
   "version": "0.1.0",
   "main": "./lib/index",
-  "devDependencies": {
-    "mocha": "~1.8.1",
-    "expect.js": "~0.2.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mteam/marshmallow.git"
   },
   "dependencies": {
     "glob": "~3.1.14",
     "batch": "~0.2.1",
     "async": "~0.1.22",
     "ejs": "~0.8.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.1",
+    "expect.js": "~0.2.0"
   }
 }
