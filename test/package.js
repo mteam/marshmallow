@@ -5,12 +5,12 @@ var Package = require('../lib/package'),
 describe('package', function() {
   var compilers = new Compilers;
 
-  function newp(dir, name) {
-    return new Package(name, __dirname + '/' + dir, compilers);
+  function newp(name, dir, pattern) {
+    return new Package(name, __dirname + '/' + dir, pattern, compilers);
   }
 
   it('discovers', function(done) {
-    var pkg = newp('foo', 'foobar');
+    var pkg = newp('foobar', 'foo');
 
     pkg.discover(function(err) {
       expect(pkg.modules).to.have.length(3);
@@ -23,12 +23,23 @@ describe('package', function() {
     });
   });
 
+  it('discovers with another pattern', function(done) {
+    var pkg = newp('barbaz', 'baz', 'lib/**/*');
+
+    pkg.discover(function(err) {
+      expect(pkg.modules).to.have.length(1);
+      expect(pkg.modules[0].name).to.be('barbaz/lib/module');
+
+      done(err);
+    });
+  });
+
   it('compiles', function(done) {
     var files = [
       'foo/index.js', 'foo/lib/bar.js', 'foo/lib/foo.json'
     ].map(function(file) { return __dirname + '/' + file });
 
-    var pkg = newp('foo', 'foobar');
+    var pkg = newp('foobar', 'foo');
 
     pkg.initialize(files);
 
